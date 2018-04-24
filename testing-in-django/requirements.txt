@@ -1,0 +1,4 @@
+Django==2.0.4
+selenium==3.11.0
+django-nose==1.4.5
+coverage==4.5.1

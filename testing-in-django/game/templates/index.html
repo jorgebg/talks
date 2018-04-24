@@ -1,0 +1,15 @@
+<p>{{ message }}</p>
+
+<form method="POST">
+  {% for shape in shapes %}
+  <button type="submit" name="choice" value="{{ shape }}">{{ shape }}</button>
+  {% endfor %}
+</form>
+
+<ul>
+  {% for round in rounds %}
+  <li>{{ round }}</li>
+  {% empty %}
+  <li>No rounds</li>
+  {% endfor %}
+</ul>

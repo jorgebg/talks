@@ -1,0 +1,18 @@
+[
+  {
+    "model": "game.round",
+    "pk": 1,
+    "fields": {
+      "left": "Paper",
+      "right": "Rock"
+    }
+  },
+  {
+    "model": "game.round",
+    "pk": 2,
+    "fields": {
+      "left": "Rock",
+      "right": "Paper"
+    }
+  }
+]
