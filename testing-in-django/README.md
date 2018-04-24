@@ -39,6 +39,7 @@ End To End
 
 ```bash
 # chromedriver must be in $PATH
+# Download it in https://sites.google.com/a/chromium.org/chromedriver/downloads
 PATH=.:$PATH ./manage.py test game.tests.tests_e2e
 ```
 
