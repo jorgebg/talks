@@ -6,6 +6,8 @@ https://martinfowler.com/bliki/TestPyramid.html
 
 # Django Test Classes
 
+https://docs.djangoproject.com/en/2.0/topics/testing/
+
 ```
 unittest.TestCase
 ├── django.test.SimpleTestCase
