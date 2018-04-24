@@ -8,13 +8,8 @@ https://martinfowler.com/bliki/TestPyramid.html
 
 https://docs.djangoproject.com/en/2.0/topics/testing/
 
-```
-unittest.TestCase
-├── django.test.SimpleTestCase
-└── django.test.TransactionTestCase
-    ├── django.test.TestCase
-    └── django.test.LiveServerTestCase
-```
+
+![Django Tests Classes Hierarchy](django_unittest_classes_hierarchy.svg)
 
 
 # Usage
