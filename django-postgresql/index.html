@@ -187,7 +187,7 @@ exclude: true
 --
 
 .large[
-![Coop. Los Mochuelos](img/mochuelos.png "Coop. Los Mochuelos")
+[![Coop. Los Mochuelos](img/mochuelos.png "Cooperativa Los Mochuelos")](https://mochuelos.org/)
 ]
 
 
@@ -280,7 +280,7 @@ Se ignoran:
 
 - artículos
 - pronombres
-- reposiciones
+- preposiciones
 
 --
 
@@ -449,7 +449,7 @@ Operadores **AND**, **OR** y **NOT**
 # SELECT to_tsquery('tortilla | cebolla');
     to_tsquery
 ------------------
- 'tortilla' & 'cebolla'
+ 'tortilla' | 'cebolla'
 ```
 
 
@@ -600,7 +600,7 @@ Igual que `__search` pero nos permite configurar la búsqueda.
 --
 
 ```
->>> Pokemon.objects.create(name='pikachu', 'Una rata eléctrica')
+>>> Pokemon.objects.create(name='pikachu', description='Una rata eléctrica')
 <Pokemon: pikachu>
 ```
 
