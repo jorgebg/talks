@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Django y PostgreSQL – Jorge Barata</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="theme.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <textarea id="source">
+layout: true
+count: false
+
+---
+class: center, bottom, frontpage, inverse
+
+# Django y PostgreSQL
+
+### Baterías incluidas
+
+Jorge Barata / [@neuralhacker](https://twitter.com/neuralhacker)
+
+---
+class: center
+
+
+# PostgreSQL
+
+.large[
+![PostgreSQL](img/postgresql.svg "PostgreSQL")
+]
+
+--
+
+Universidad de California
+
+1989
+
+PostgreSQL License
+
+???
+
+
+Originariamente MIT License
+
+GPL compatible
+
+En junio cumplirá 30 años de la versión 1
+
+---
+class: center
+
+
+# PostgreSQL
+
+.large[
+![birthday](img/birthday.gif "birthday")
+]
+
+Universidad de California
+
+1989
+
+PostgreSQL License
+
+
+---
+background-image: url(img/arXiv.org.png)
+class: center, bottom
+
+
+[https://arxiv.org/abs/1901.01973](https://arxiv.org/abs/1901.01973)
+
+---
+class: center
+
+# PostgreSQL en la industria
+
+
+--
+
+.pull-left.large[
+![Instagram](img/instagram.png "Instagram")
+]
+.pull-right.large[
+![Spotify](img/spotify.svg "Spotify")
+]
+
+--
+
+.break[]
+
+![Netflix](img/netflix.png "Netflix")
+![Uber](img/uber.jpg "Uber")
+
+???
+
+Netflix y Uber migró a MySQL en 2016
+
+---
+
+# Bases de Datos en Django
+
+- PostgreSQL
+- MySQL
+- SQLite
+- Oracle
+
+???
+
+
+MySQL:
+The most popular and commonly used RDBMS.
+
+SQLite:
+Muy usada en sistemas embebidos, navegador, android
+
+---
+class: center
+
+# `django.contrib.postgres`
+
+--
+
+.left[
+> “There is no fundamental reason why (for example) a `contrib.mysql` module does not exist, except that PostgreSQL has the richest feature set of the supported databases so its users have the most to gain.”
+]
+
+– Django 2.1 Documentation
+
+--
+
+- Full Text Search
+- Extensions
+- Model fields
+
+???
+
+Voy a dedicar mas tiempo a FTS por ser a mi juicio una de las funcionalidades mas interesantes
+
+---
+class: center
+
+# Full Text Search
+
+
+Elastic Search, Solr, Lucene
+
+--
+
+.pull-left[
+## PROS
+- Versatilidad
+- Recursos
+]
+
+.pull-right[
+## CONS
+- Sincronización
+- Dependencias
+]
+
+---
+class: center
+
+# Mi experiencia
+
+--
+exclude: true
+
+![Udemy](img/udemy.svg "Udemy")
+
+![Eventbrite](img/eventbrite.png "Eventbrite")
+
+--
+
+.large[
+![Coop. Los Mochuelos](img/mochuelos.png "Coop. Los Mochuelos")
+]
+
+
+Proyectos pequeños, pocos recursos
+
+.break[]
+
+--
+
+
+Django + PostgreSQL es fácil de instalar
+
+--
+
+~~ElasticSearch + Celery~~
+
+???
+
+Vengo a defender la idea de el uso de Django + PostgreSQL para iniciar proyectos
+
+---
+class: center
+
+# Full Text Search
+
+.large[
+![search](img/search.svg "search")
+]
+
+Conceptos básicos
+
+
+---
+
+# _Stemming_
+
+Consiste en reducir palabras a su raíz.
+
+--
+
+Se eliminan prefijos y sufijos:
+
+- plural/singular
+- masculino/femenino
+- conjugaciones verbales
+
+---
+
+# _Stemming_
+
+.center[
+libro
+
+librería
+]
+
+--
+
+.center[
+**libr**
+]
+
+---
+
+# _Stemming_
+
+Hay diversos algoritmos.
+
+--
+
+Algunos más eficaces, otros más precisos.
+
+--
+
+.break[]
+
+_Snowball_
+
+http://snowballstem.org/demo.html
+
+---
+
+# _Stop Words_
+
+Palabras conocidas que no son relevantes.
+
+--
+
+Se ignoran:
+
+- artículos
+- pronombres
+- reposiciones
+
+--
+
+de, la, que, el, en, y, a...
+
+???
+
+Normalización
+
+Raíz o lexema
+
+---
+class: center
+
+# Full Text Search
+
+.large[
+![PostgreSQL](img/postgresql.svg "PostgreSQL")
+]
+
+Conceptos básicos
+
+---
+
+## `tsvector` type
+
+Representa un **documento** optimizado para búsquedas de texto.
+
+Configuración: lenguaje, _stemming_, _stop words_.
+
+--
+
+.break[]
+
+## `tsquery` type
+
+Representa una búsqueda de texto.
+
+???
+
+Reducir palabras a su raíz
+
+---
+
+
+## `to_tsvector` function
+
+Transforma un texto en `tsvector`.
+
+.break[]
+
+```sql
+# SELECT to_tsvector('I like pancakes');
+     to_tsvector
+---------------------
+ 'like':2 'pancak':3
+```
+
+--
+
+.break[]
+
+```sql
+# SELECT get_current_ts_config();
+ get_current_ts_config
+-----------------------
+ english
+```
+
+---
+
+## `to_tsvector` function
+
+El **lenguaje** es importante.
+
+.break[]
+
+```sql
+# SELECT to_tsvector('Me gustan las tortitas');
+          to_tsvector
+--------------------------------
+ 'gustan':2 'las':3 'tortita':4
+```
+
+.break[]
+
+```sql
+# SELECT to_tsvector('spanish', 'Me gustan las tortitas');
+     to_tsvector
+---------------------
+ 'gust':2 'tortit':4
+```
+
+
+---
+
+## `to_tsvector` function
+
+El **lenguaje** es importante.
+
+.break[]
+
+```sql
+# SELECT to_tsvector('english', 'librerías');
+ to_tsvector
+--------------
+ 'librería':1
+```
+
+.break[]
+
+```sql
+# SELECT to_tsvector('spanish', 'librerías, libro');
+ to_tsvector
+-------------
+ 'libr':1,2
+```
+
+---
+
+## `to_tsquery` function
+
+Transforma una consulta en `tsquery`
+
+--
+
+.break[]
+
+```sql
+# SELECT to_tsquery('engine');
+ to_tsquery
+------------
+ 'engin'
+```
+
+--
+
+.break[]
+
+_Stemming_ igual que con `tsvector`
+
+```sql
+# SELECT to_tsquery('spanish', 'tortilla');
+ to_tsquery
+------------
+ 'tortill'
+```
+
+---
+
+## `to_tsquery` function
+
+Operadores **AND**, **OR** y **NOT**
+
+--
+
+```sql
+# SELECT to_tsquery('tortilla & cebolla');
+    to_tsquery
+------------------
+ 'tortilla' & 'water'
+```
+
+
+```sql
+# SELECT to_tsquery('tortilla | cebolla');
+    to_tsquery
+------------------
+ 'tortilla' & 'cebolla'
+```
+
+
+```sql
+# SELECT to_tsquery('!cebolla');
+    to_tsquery
+------------------
+ !'cebolla'
+```
+
+---
+class: center
+
+# Full Text Search
+
+.large[
+![Django](img/django.svg "Django")
+]
+
+
+
+---
+background-image: url(img/quietos.jpg)
+class: bottom
+
+--
+
+```
+INSTALLED_APPS = [
+    # ...
+    'django.contrib.postgres',
+    # ...
+]
+```
+
+---
+
+Un modelo de ejemplo
+
+```
+from django.db import models
+
+
+class Pokemon(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+```
+
+--
+
+.center.large[
+![pikachu](img/pikachu-electric.gif "pikachu")
+![charmander](img/charmander.gif "charmander")
+]
+
+
+---
+
+## `__search` queryset lookup
+
+Llama a `to_tsvector`
+
+--
+
+```
+>>> Pokemon.objects.create(
+...   name='charmander',
+...   description='One of the three starter monsters'
+... )
+<Pokemon: charmander>
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(description__search='monster')
+<QuerySet [<Pokemon: charmander>]>
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(description__search='the')
+<QuerySet []>
+```
+
+
+--
+
+
+.center[
+![pikachu](img/pikachu.png "pikachu")
+]
+
+--
+
+.center[
+`the` es una _stop word_
+]
+
+---
+
+## Stop Words
+
+.left[
+```bash
+$ head /usr/share/postgresql/9.4/tsearch_data/english.stop
+i
+me
+my
+myself
+we
+our
+ours
+ourselves
+you
+your
+```
+]
+
+--
+
+.left[
+```bash
+$ head /usr/share/postgresql/9.4/tsearch_data/spanish.stop
+de
+la
+que
+el
+en
+y
+a
+los
+del
+se
+```
+]
+
+---
+
+## `SearchVector` class
+
+Igual que `__search` pero nos permite configurar la búsqueda.
+
+--
+
+```
+>>> Pokemon.objects.create(name='pikachu', 'Una rata eléctrica')
+<Pokemon: pikachu>
+```
+
+--
+
+```
+>>> from django.contrib.postgres.search import SearchVector
+>>> qs = Pokemon.objects.annotate(
+...   search=SearchVector('name', 'description', config='spanish')
+... )
+```
+
+--
+
+```
+>>> qs.filter(search='Pikachu')
+<QuerySet [<Pokemon: pikachu>]>
+```
+
+--
+
+```
+>>> qs.filter(search='eléctrico')
+<QuerySet [<Pokemon: pikachu>]>
+```
+
+---
+class: top
+
+```sql
+# SELECT * FROM ts_debug('spanish', 'eléctrico');
+ alias |    description    |   token   |  dictionaries  |  dictionary  | lexemes
+-------+-------------------+-----------+----------------+--------------+----------
+ word  | Word, all letters | eléctrico | {spanish_stem} | spanish_stem | {electr}
+(1 row)
+```
+
+--
+
+```sql
+# SELECT dictname FROM pg_ts_dict;
+    dictname
+-----------------
+ simple
+ danish_stem
+ dutch_stem
+ english_stem
+ finnish_stem
+ french_stem
+ german_stem
+ hungarian_stem
+ italian_stem
+ norwegian_stem
+ portuguese_stem
+ romanian_stem
+ russian_stem
+ spanish_stem
+ swedish_stem
+ turkish_stem
+ unaccent
+(17 rows)
+```
+
+--
+
+.center[
+![pikachu](img/pikachu.png "pikachu")
+]
+
+---
+
+## `SearchVectorField` model field
+
+--
+
+Las llamadas a `to_tsvector` son caras
+
+.very-large.center[
+![vector](img/vector.gif "vector")
+]
+
+---
+
+## `SearchVectorField` model field
+
+
+Podemos cachear el texto ya vectorizado en el modelo
+
+--
+
+```
+*from django.contrib.postgres.search import SearchVectorField
+from django.db import models
+
+
+class Pokemon(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+*   search_vector = SearchVectorField()
+
+```
+
+--
+
+```
+>>> Pokemon.objects.update(search_vector=SearchVector('name', 'description'))
+2
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(search_vector='pikachu')
+<QuerySet [<Pokemon: pikachu>]>
+```
+
+---
+
+## `SearchVectorField` model field
+
+¡Hay que mantenerlo actualizado!
+
+--
+
+.center[
+.pull-left[
+## Django
+Sobreescribir `save`
+]
+]
+
+--
+
+.center[
+.pull-right[
+## PostgreSQL
+Triggers
+]
+]
+
+
+---
+## `SearchVectorField` model field
+
+.center[
+¿Podemos optimizarlo más?
+]
+
+--
+
+
+.center[
+![pikachu](img/pikachu.png "pikachu")
+]
+
+--
+
+.center[
+# Índices
+]
+
+--
+
+.center[
+`Field.db_index` crea índices B-Tree por defecto.
+
+No es el más adecuado.
+]
+
+---
+## `SearchVectorField` model field
+
+.center[
+## GIN: Generalized Inverted Index
+]
+
+--
+
+.very-large.center[
+![gin](img/gin.gif "gin")
+]
+
+
+---
+## Generalized Inverted Index (GIN)
+
+
+Pensado para tipos que tienen valores múltiples, como `tsvector`.
+
+--
+
+Parejas de (`clave`, `IDs`), donde `IDs` son los documentos que contienen dicha clave.
+
+--
+
+```sql
+# SELECT * FROM core_pokemon;
+ id |    name    |        description     |   search_vector
+----+------------+------------------------+--------------------
+  1 | charmander | Una rata en llamas     | 'rat':2 'llam':4
+  2 | pikachu    | Una rata eléctrica     | 'rat':2 'electr':3
+```
+
+--
+
+```sql
+key    | document_ids
+-------+--------------
+rat    | 1, 2
+llam   | 1
+electr | 2
+```
+
+---
+
+## Generalized Inverted Index (GIN)
+
+.very-large.center[
+![gin](img/gin2.gif "gin")
+]
+
+
+---
+class: middle, center
+
+# Muy bonito.
+# ¿Y en Django?
+
+---
+
+## Generalized Inverted Index (GIN)
+
+```
+*from django.contrib.postgres.indexes import GinIndex
+from django.contrib.postgres.search import SearchVectorField
+from django.db import models
+
+
+class Pokemon(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    search_vector = SearchVectorField()
+
+    class Meta:
+        indexes = [
+*           GinIndex(fields=['search_vector']),
+        ]
+
+```
+
+
+---
+
+## `SearchQuery` class
+
+--
+
+Representa un objecto `tsquery` de PostgreSQL.
+
+--
+
+```
+>>> from django.contrib.postgres.search import SearchQuery
+>>> SearchQuery('pizza') & SearchQuery('piña')
+    # pizza AND piña
+
+```
+--
+
+```
+>>> SearchQuery('pizza') | SearchQuery('piña')
+    # pizza OR piña
+```
+
+--
+
+```
+>>> ~SearchQuery('piña')
+    # NOT piña
+```
+
+--
+
+.break[]
+
+```
+>>> Pokemon.objects.filter(search_vector=SearchQuery('pikachu'))
+<QuerySet [<Pokemon: pikachu>]>
+```
+
+???
+
+Nos permite hacer consultas más elaboradas.
+
+---
+
+## `SearchRank` class
+
+Nos permite calcular una puntuación para cada documento (basada en la consulta).
+
+--
+
+Útil para mostrar resultados ordenados por relevancia.
+
+--
+
+- Frecuencia de términos
+- Similitud de términos
+- Pesos de los campos
+
+--
+
+Cuanto mejor sea la coincidencia, mayor puntuación tendrán.
+
+
+---
+
+## `SearchRank` class
+
+```
+>>> from django.contrib.postgres.search import SearchRank
+>>> vector = SearchVector('name', 'description')
+>>> query = SearchQuery('pikachu')
+>>> qs = Pokemon.objects.annotate(
+...   rank=SearchRank(vector, query)
+... ).order_by('-rank')
+>>> for pokemon in qs:
+...   print(pokemon.name, pokemon.rank)
+```
+
+--
+
+```
+pikachu 0.0607927
+charmander 0.0
+```
+
+--
+
+.center.large[
+![pikachu](img/pikachu.png "pikachu")
+]
+
+---
+
+## `SearchRank` class
+
+```
+>>> from django.contrib.postgres.search import SearchRank
+>>> vector = (
+*...   SearchVector('name', weight='A') +
+*...   SearchVector('description', weight='B')
+)
+>>> query = SearchQuery('pikachu')
+>>> qs = Pokemon.objects.annotate(
+...   rank=SearchRank(vector, query)
+*... ).filter(rank__gte=0.3).order_by('rank')
+>>> for pokemon in qs:
+...   print(pokemon.name, pokemon.rank)
+```
+
+--
+
+```
+pikachu 0.607927
+```
+
+--
+
+.center.large[
+![pikachu](img/pikachu.gif "pikachu")
+]
+
+---
+
+## Resumen
+
+
+```
+# __search lookup
+
+Pokemon.objects.filter(description__search='monster')
+```
+
+
+```
+# SearchVector
+
+Pokemon.objects.annotate(
+  search=SearchVector('name', 'description', config='spanish')
+).filter(search='Pikachu')
+```
+
+
+```
+# SearchQuery
+
+).filter(search=SearchQuery('rata') & ~SearchQuery('llamas'))
+```
+
+
+```
+# SearchRank
+
+Pokemon.objects.annotate(
+ rank=SearchRank(vector, query)
+).filter(rank__gte=0.3).order_by('rank')
+```
+
+---
+
+# Extensiones
+
+```sql
+CREATE EXTENSION [ IF NOT EXISTS ] extension_name
+```
+
+--
+
+
+```
+from django.contrib.postgres.operations
+```
+
+En Django se activan via migraciones
+
+--
+
+.pull-left[
+- .mute[CreateExtension]
+- BtreeGinExtension
+- BtreeGistExtension
+- CITextExtension
+]
+
+.pull-right[
+- CryptoExtension
+- HStoreExtension
+- TrigramExtension
+- UnaccentExtension
+]
+
+???
+
+Se crean como migraciones
+
+---
+
+# Extensiones
+
+```sql
+CREATE EXTENSION [ IF NOT EXISTS ] extension_name
+```
+
+
+```
+from django.contrib.postgres.operations
+```
+
+En Django se activan via migraciones
+
+
+.pull-left[
+- .mute[CreateExtension]
+- .mute[BtreeGinExtension]
+- .mute[BtreeGistExtension]
+- .mute[CITextExtension]
+]
+
+.pull-right[
+- .mute[CryptoExtension]
+- .mute[HStoreExtension]
+- TrigramExtension
+- UnaccentExtension
+]
+
+---
+
+# Extensiones
+
+```
+from django.contrib.postgres.operations import (
+    TrigramExtension, UnaccentExtension
+)
+from django.db import migrations
+
+
+class Migration(migrations.Migration):
+
+    # ...
+
+    operations = [
+*       TrigramExtension(),
+*       UnaccentExtension(),
+    ]
+
+```
+
+
+---
+
+## `TrigramExtension`
+
+Nos permite consultar palabras similares.
+
+--
+
+`__trigram_similar` lookup
+
+```
+>>> Pokemon.objects.filter(name__trigram_similar='pika')
+<QuerySet [<Pokemon: pikachu>]>
+```
+
+--
+
+`TrigramSimilarity` annotation
+
+```
+>>> from django.contrib.postgres.search import TrigramSimilarity
+>>> qs = Pokemon.objects.annotate(
+...     similarity=TrigramSimilarity('name', 'pika'),
+... ).order_by('-similarity')
+>>> for pokemon in qs:
+...   print(pokemon.name, pokemon.similarity)
+pikachu 0.444444
+charmander 0.0
+```
+
+
+
+---
+
+## `UnaccentExtension`
+
+Nos permite hacer consultas ignorando las tildes.
+
+--
+
+```sh
+$ head /usr/share/postgresql/9.4/tsearch_data/unaccent.rules
+À	A
+Á	A
+Â	A
+Ã	A
+Ä	A
+Å	A
+```
+
+--
+
+`__unaccent` lookup
+
+```
+>>> Pokemon.objects.filter(description__unaccent__contains='electrica')
+<QuerySet [<Pokemon: pikachu>]>
+```
+
+
+---
+class: center
+
+# Model fields
+
+.large[
+![PostgreSQL](img/postgresql.svg "PostgreSQL")
+]
+
+
+---
+
+## `ArrayField`
+
+--
+
+En Python son listas
+
+--
+
+Pero en PostgreSQL son estrictamente homogéneas
+
+--
+
+.very-large.center[
+![chiquito](img/chiquito.gif "Cuidadín")
+]
+
+
+
+???
+
+Tiene su propio tipo en PostgreSQL
+
+Cuidadín
+
+---
+
+## `ArrayField`
+
+```
+*from django.contrib.postgres.fields import ArrayField
+from django.db import models
+
+
+class Pokemon(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+*   types = ArrayField(models.CharField(max_length=10), default=list)
+```
+
+--
+
+Denormalizaciones, N:M...
+
+--
+
+Usar `GIN` si necesitamos indexar
+
+---
+
+## `ArrayField`
+
+```
+>>> raichu.types = ['electric', 'psychic']
+>>> raichu.save()
+>>> geodude.types = ['electric', 'rock']
+>>> geodude.save()
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(types__contains=['electric'])
+<QuerySet [<Pokemon: raichu>, <Pokemon: geodude>]>
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(types__contained_by=['rock', 'electric', 'psychic'])
+<QuerySet [<Pokemon: raichu>, <Pokemon: geodude>]>
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(types__overlaps=['rock', 'psychic'])
+<QuerySet [<Pokemon: raichu>, <Pokemon: geodude>]>
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(types__len=0)
+<QuerySet [<Pokemon: pikachu>, <Pokemon: charmander>]>
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(types__0='rock')  # Index
+<QuerySet [<Pokemon: geodude>]>
+>>> Pokemon.objects.filter(types__1_2=['psychic'])  # Slice
+<QuerySet [<Pokemon: raichu>]>
+```
+
+---
+## `HStoreField`
+
+--
+
+Es un mapa clave/valor.
+
+--
+
+Claves y valores son estrictamente `strings`.
+
+--
+
+Pero en Python son diccionarios.
+--
+.center[
+![chiquito](img/chiquito.gif "Cuidadín")
+]
+
+--
+
+Necesario instalar extensión `HStoreExtension`.
+
+--
+
+La única forma de guardar datos desestructurados antes de `JSONField`.
+
+---
+
+## `JSONField`
+
+PostgreSQL diferencia dos tipos distintos
+
+--
+
+.pull-left[
+## `json`
+
+Almacenado como texto
+
+Decodificado en cada consulta
+
+]
+
+--
+
+.pull-right[
+## `jsonb`
+
+Almacenado como estructura
+
+Permite índices
+
+Escribir es un poco más caro
+
+]
+
+
+---
+
+## `JSONField`
+
+Django `JSONField` usa siempre `jsonb`.
+
+--
+
+```
+*from django.contrib.postgres.fields import JSONField
+from django.db import models
+
+
+class Pokemon(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+*   data = JSONField()
+```
+
+--
+
+Usar `GIN` si necesitamos indexar
+
+---
+
+## `JSONField`
+
+```
+>>> pikachu.data = {
+...   'weight': 6, 'height': 40,
+...   'moveset': ['thunder shock', 'thunder wave', 'quick attack', 'swift']
+... }
+>>> pikachu.save()
+>>> charmander.data = {
+...   'weight': 8.4, 'height': 61,
+...   'moveset': ['growl', 'scratch', 'ember', 'leer']
+... }
+>>> charmander.save()
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(data__weight=6)
+<QuerySet [<Pokemon: pikachu>]>
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(data__height__gt=50)
+<QuerySet [<Pokemon: charmander>]>
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(data__contains={'moveset': ['quick attack', 'swift']})
+<QuerySet [<Pokemon: pikachu>]>
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(data__moveset__contains=['growl'])
+<QuerySet [<Pokemon: charmander>]>
+```
+
+
+---
+
+## `JSONField`
+
+```
+>>> pikachu.data = {
+...   'weight': 6, 'height': 40,
+...   'moveset': ['thunder shock', 'thunder wave', 'quick attack', 'swift']
+... }
+>>> pikachu.save()
+>>> charmander.data = {
+...   'weight': 8.4, 'height': 61,
+...   'moveset': ['growl', 'scratch', 'ember', 'leer']
+... }
+>>> charmander.save()
+```
+
+```
+>>> Pokemon.objects.filter(data__moveset__contained_by=[
+...   'growl', 'scratch', 'ember', 'leer', 'tackle'
+... ])
+<QuerySet [<Pokemon: charmander>]>
+```
+
+
+--
+
+```
+>>> Pokemon.objects.filter(data__has_any_keys=['height', 'tail'])
+<QuerySet [<Pokemon: pikachu>, <Pokemon: charmander>]>
+```
+
+--
+
+```
+>>> Pokemon.objects.filter(data__has_keys=['height', 'weight'])
+<QuerySet [<Pokemon: pikachu>, <Pokemon: charmander>]>
+```
+---
+class: center, bottom
+background-image: url(img/vegeta.gif)
+
+JSON queries + Full Text Search...
+
+---
+class: center, bottom
+background-image: url(img/vegeta.gif)
+
+NoSQL in PostgreSQL?
+
+---
+class: center, bottom
+background-image: url(img/vegeta.gif)
+
+![mongodb](img/mongodb.jpg "mongodb")
+
+
+
+---
+background-image: url(img/mongo.png)
+
+---
+background-image: url(img/over9000.gif)
+
+
+
+---
+## `RangeFields`
+
+Rangos nativos en PostgreSQL
+
+--
+
+Los extremos pueden ser abiertos o cerrados
+
+--
+
+[a, b] ![cerrado](img/cerrado.png "cerrado")
+
+(a, b) ![abierto](img/abierto.png "abierto")
+
+[a, b) ![cerrado y abierto](img/cerrado-abierto.png "cerrado y abierto")
+
+
+
+---
+## `RangeFields`
+
+`IntegerRangeField`
+
+`BigIntegerRangeField`
+
+`FloatRangeField`
+
+`DateTimeRangeField`
+
+`DateRangeField`
+
+---
+
+## `RangeFields`
+
+```
+from django.contrib.postgres.fields import DateTimeRangeField
+
+
+class Battle(models.Model):
+    a = models.ForeignKey(Pokemon, related_name='+', on_delete=models.CASCADE)
+    b = models.ForeignKey(Pokemon, related_name='+', on_delete=models.CASCADE)
+    schedule = DateTimeRangeField()
+
+    def __str__(self):
+        return f'{self.a} vs {self.b}'
+```
+
+---
+
+## `RangeFields`
+
+```
+>>> from datetime import datetime
+>>> from psycopg2.extras import DateTimeTZRange
+>>> Battle.objects.create(
+...   a=pikachu, b=charmander,
+...   schedule=DateTimeTZRange(
+...     datetime(2019, 1, 24, 16, 0, 0),
+...     datetime(2019, 1, 24, 17, 0, 0)),
+... )
+```
+
+--
+
+```
+>>> Battle.objects.filter(schedule__adjacent_to=DateTimeTZRange(
+...     datetime(2019, 1, 24, 15, 0, 0), datetime(2019, 1, 24, 16, 0, 0))
+... )
+<QuerySet [<Battle: pikachu vs charmander>]>
+```
+
+--
+
+```
+>>> Battle.objects.filter(schedule__fully_lt=DateTimeTZRange(
+...     datetime(2019, 1, 24, 16, 30, 0), datetime(2019, 1, 24, 17, 30, 0))
+... )
+<QuerySet []>
+```
+
+--
+
+```
+>>> Battle.objects.filter(schedule__contains=DateTimeTZRange(
+...     datetime(2019, 1, 24, 15, 00, 0), datetime(2019, 1, 24, 18, 00, 0))
+... )
+<QuerySet []>
+```
+
+
+---
+
+## `RangeFields`
+
+Recomendado indexar con un índice **GiST**
+
+--
+
+Requiere instalar extensión `BtreeGistExtension`
+
+
+---
+class: center, middle
+
+# GeoDjango
+
+.large[
+![postgis](img/postgis-logo.png "postgis")
+]
+
+Base de datos espacial
+
+
+---
+class: center, middle
+
+# GeoDjango
+
+.large[
+![starwars](img/starwars.gif "starwars")
+]
+
+Base de datos espacial
+
+???
+
+Consultas espacio geometrico
+
+Vectores, Poligonos
+
+Geoespaciales
+
+Requiere instalacion
+
+---
+
+## GeoDjango
+
+Compatible con múltiples bases de datos espaciales. PostGIS es una de ellas.
+
+--
+
+**PostGIS no viene con PostgreSQL**. Requiere instalación aparte.
+
+--
+
+.break[]
+
+Integración con la administración de Django
+
+(por defecto OpenLayers JavaScript)
+
+---
+background-image: url(img/postgis.png)
+
+
+---
+class: middle, center
+
+# ¡Gracias!
+
+Podéis consultar la presentación y el código en
+
+[jorgebg.com/talks/postgresql-django](https://jorgebg.com/talks/postgresql-django)
+
+[@neuralhacker](https://twitter.com/neuralhacker)
+
+    </textarea>
+    <script src="remark.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'monokai',
+        highlightLanguage: 'python',
+        highlightLines: true,
+        countIncrementalSlides: false
+      });
+    </script>
+  </body>
+</html>

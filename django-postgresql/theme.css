@@ -1,0 +1,117 @@
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+body {
+  font-family: 'Droid Serif';
+}
+li, p {
+  font-size: 1.5em;
+}
+h1, h2, h3 {
+  font-family: 'Yanone Kaffeesatz';
+  font-weight: 400;
+}
+.remark-slide-content ul {
+  width: fit-content;
+  margin: 0 auto;
+}
+.remark-slide-content h1 {
+  font-size: 3em;
+  margin-bottom: 1.5em;
+  line-height: 0.8em;
+}
+.remark-slide-content h2 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+.remark-slide-content h3 {
+  font-size: 1.6em;
+  margin-bottom: 0.8em;
+}
+.remark-slide-content {
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.footnote {
+  position: absolute;
+  bottom: 3em;
+}
+ul {
+  text-align: left;
+  list-style: inside;
+}
+ul li {
+  margin-bottom: 1em;
+}
+img {
+  max-width: 7em;
+  max-height: 2em;
+}
+.large {
+  font-size: 2em;
+}
+.large img {
+  max-height: 3em;
+}
+.very-large {
+  font-size: 3em;
+}
+.very-large img {
+  max-height: 4em;
+}
+/* li p { line-height: 1.25em; } */
+a, a > code {
+  color: rgb(249, 38, 114);
+  text-decoration: none;
+}
+code {
+  background: #e7e8e2;
+  border-radius: 5px;
+}
+span.break {
+  padding: 1em;
+}
+.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+.remark-code-line-highlighted {
+  background-color: rgba(255, 255, 0, 0.2);
+}
+.remark-code-span-highlighted {
+  background-color: rgba(255, 255, 0, 0.2);
+  padding: 1px 2px 2px 2px;
+}
+.inverse {
+  background-color: #272822;
+  /* color: #777872; */
+  color: #b3b5ab;
+}
+.inverse h1, .inverse h2 {
+  color: #f3f3f3;
+}
+.inverse ul {
+  color: #f3f3f3;
+}
+
+.frontpage {
+  background-image: url(img/background.jpg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.frontpage h1 {
+  margin-bottom: 0.5em;
+}
+
+.pull-left {
+  float: left;
+  width: 48%;
+}
+.pull-right {
+  float: right;
+  width: 48%;
+}
+
+.mute {
+  color: #999;
+}
