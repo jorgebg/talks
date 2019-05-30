@@ -1,0 +1,96 @@
+% last updated in April 2002 by Antje Endemann
+% Based on CVPR 07 and LNCS, with modifications by DAF, AZ and elle, 2008 and AA, 2010, and CC, 2011; TT, 2014; AAS, 2016
+
+\documentclass[runningheads]{llncs}
+\usepackage[english,spanish.notilde.lcroman,shorthands=off]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb} % define this before the line numbering.
+\usepackage{ruler}
+\usepackage{color}
+\usepackage{enumitem,amssymb}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+\hspace{-2.5pt}}
+\usepackage[width=122mm,left=12mm,paperwidth=146mm,height=193mm,top=12mm,paperheight=217mm]{geometry}
+
+\usepackage{fancyhdr}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength\headheight{80.0pt}
+\addtolength{\textheight}{-80.0pt}
+%\chead{\includegraphics[width=0.15\textwidth]{Largo.PNG}}
+
+\begin{document}
+
+\pagestyle{headings}
+\mainmatter
+
+
+\title{Plantilla de \LaTeX para CFP} % Replace with your title
+
+
+\author{Propuesta an\'onima para PyConES 2019}
+
+\maketitle
+
+\section{Tipo de Contribuci\'on}
+
+\begin{todolist}
+  \item [\done] Ejemplo
+  \item Charla corta
+  \item Charla extendida
+  \item P\'oster
+  \item Taller
+  \end{todolist}
+
+
+\section{Idioma}
+\begin{todolist}
+  \item [\done] Ejemplo
+  \item Espa\~nol
+  \item Ingl\'es
+\end{todolist}
+\section{Nivel}
+
+\begin{todolist}
+  \item [\done] Ejemplo
+  \item Avanzado
+  \item Medio
+  \item Iniciaci\'on
+  \end{todolist}
+
+\keywords{Core Python, Data Sciencie, Big Data \dots}
+
+\newpage
+
+\section{Resumen}
+\textit{Entre 150 y 200 palabras. El resumen debe contener los aspectos m\'as relevantes de la propuesta. Debe estar redactado en un \'unico p\'arrafo y debe ser concreto y conciso.}
+
+\section{Presentaci\'on}
+
+\textit{Aunque no existe un l\'imite estricto de palabras, una extensi\'on normal no suele ser superior a una p\'agina. Esta presentaci\'on puede contener fotograf\'ias, gr\'aficos, y enlaces a demos y/o c\'odigo (el cual no se incluir\'a en la propuesta). En la propuesta debe distinguirse de manera clara los aspectos m\'as relevantes para que la propuesta sea inteligible (ejemplo: Introducci\'on, metodolog\'ia empleada, resultados que se han obtenido, demos y/o fragmentos de c\'odigo imprescindibles \dots). Adem\'as, se deber\'an aportar las conclusiones m\'as destacadas de la propuesta y las referencias consultadas.}
+\cite{Alpher02},
+\cite{Alpher03}, \cite{Alpher04} \dots
+
+
+\section{Pre-requisitos para atender a la presentación}
+\textit{Ejemplo1:} Los asistentes deber\'an tener conocimientos previos de \dots 
+
+\textit{Ejemplo2:} Los asistentes podr\'an participar activamente en una demo \dots
+
+\section{Otros requerimientos t\'ecnicos}
+
+\textit{Ejemplo1:} Necesitar\'e unos minutos adicionales antes de comenzar la propuesta para preparar una demo \dots 
+
+\textit{Ejemplo2:} Utilizar\'e mi ordenador para la propuesta y necesitar\'e \dots. 
+
+
+\clearpage
+
+\bibliographystyle{splncs}
+\bibliography{egbib}
+\end{document}

@@ -1,0 +1,22 @@
+\begin{thebibliography}{1}
+
+\bibitem{IanGorton}
+Gorton, I.:
+\newblock Essential software architecture - 2nd edition (2011)
+
+\bibitem{MartinFowler}
+Fowler, M.:
+\newblock Microservices.
+\newblock \url{https://www.martinfowler.com/articles/microservices.html} (2014)
+
+\bibitem{PySOA}
+Eventbrite:
+\newblock Pysoa.
+\newblock \url{https://github.com/eventbrite/pysoa} (2017)
+
+\bibitem{PySOAExample}
+Barata, J.:
+\newblock Pysoa example.
+\newblock \url{https://github.com/jorgebg/pysoa-example} (2019)
+
+\end{thebibliography}

@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+
+\bibitem{AsyncIO}
+{Python Software Foundation}:
+\newblock Pep 3156.
+\newblock \url{https://www.python.org/dev/peps/pep-3156/} (2012)
+
+\bibitem{Django}
+Godwin, A.:
+\newblock Dep 009.
+\newblock
+  \url{https://github.com/andrewgodwin/deps/blob/async/draft/0009-async.rst}
+  (2019)
+
+\end{thebibliography}

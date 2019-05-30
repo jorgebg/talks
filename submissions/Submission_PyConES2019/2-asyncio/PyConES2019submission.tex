@@ -1,0 +1,107 @@
+% last updated in April 2002 by Antje Endemann
+% Based on CVPR 07 and LNCS, with modifications by DAF, AZ and elle, 2008 and AA, 2010, and CC, 2011; TT, 2014; AAS, 2016
+
+\documentclass[runningheads]{llncs}
+\usepackage[english,spanish.notilde.lcroman,shorthands=off]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb} % define this before the line numbering.
+\usepackage{ruler}
+\usepackage{color}
+\usepackage{enumitem,amssymb}
+\usepackage{url}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+\hspace{-2.5pt}}
+\usepackage[width=122mm,left=12mm,paperwidth=146mm,height=193mm,top=12mm,paperheight=217mm]{geometry}
+
+\usepackage{fancyhdr}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength\headheight{80.0pt}
+\addtolength{\textheight}{-80.0pt}
+%\chead{\includegraphics[width=0.15\textwidth]{Largo.PNG}}
+
+\begin{document}
+
+\pagestyle{headings}
+\mainmatter
+
+
+\title{Async IO and Web frameworks: State of the art}
+
+
+\author{Jorge Barata}
+
+\maketitle
+
+\section{Tipo de Contribuci\'on}
+
+\begin{todolist}
+  \item Charla corta
+  \item [\done] Charla extendida
+  \item P\'oster
+  \item Taller
+  \end{todolist}
+
+
+\section{Idioma}
+\begin{todolist}
+  \item Espa\~nol
+  \item [\done] Ingl\'es
+\end{todolist}
+\section{Nivel}
+
+\begin{todolist}
+  \item [\done] Avanzado
+  \item Medio
+  \item Iniciaci\'on
+  \end{todolist}
+
+\keywords{asyncio, django, asgi, aiohttp, sanic, asyncpg, web framework}
+
+\newpage
+
+\section{Resumen}
+\textit{
+The amount of web frameworks based on Python Async IO is growing. What are the challenges they are facing?
+}
+
+\section{Presentaci\'on}
+
+\begin{itemize}
+  \item Introduction \cite{AsyncIO}
+  \item Challenges
+  \begin{itemize}
+    \item Databases
+    \item Templating
+    \item Email
+    \item Testing
+    \item WebSockets
+  \end{itemize}
+  \item Web Frameworks
+  \begin{itemize}
+    \item New frameworks
+    \item Django \cite{Django}
+  \end{itemize}
+  \item Conclusion
+\end{itemize}
+
+
+
+\section{Pre-requisitos para atender a la presentación}
+Los asistentes deber\'an tener conocimientos previos de Python y Async IO.
+
+\section{Otros requerimientos t\'ecnicos}
+
+Utilizar\'e mi ordenador para la propuesta y necesitar\'e adaptador HDMI a USB-C.
+
+
+\clearpage
+
+\bibliographystyle{splncs}
+\bibliography{egbib}
+\end{document}

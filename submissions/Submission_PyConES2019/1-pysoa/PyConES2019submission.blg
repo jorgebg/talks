@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2019)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: ./PyConES2019submission.aux
+The style file: splncs.bst
+Database file #1: egbib.bib
+You've used 4 entries,
+            2087 wiz_defined-function locations,
+            511 strings with 4097 characters,
+and the built_in function-call counts, 547 in all, are:
+= -- 45
+> -- 16
+< -- 0
++ -- 8
+- -- 4
+* -- 18
+:= -- 92
+add.period$ -- 3
+call.type$ -- 4
+change.case$ -- 4
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 24
+empty$ -- 73
+format.name$ -- 4
+if$ -- 126
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 0
+newline$ -- 22
+num.names$ -- 4
+pop$ -- 21
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 17
+stack$ -- 0
+substring$ -- 0
+swap$ -- 4
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 4
+width$ -- 5
+write$ -- 40

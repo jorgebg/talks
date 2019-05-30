@@ -1,0 +1,11 @@
+#!/bin/sh
+
+rm ./*-*.pdf 2> /dev/null
+
+for dir in `find . -maxdepth 1 -name "*-*"`
+do
+  pushd $dir
+  make
+  popd
+  ln -s $dir/PyConES2019submission.pdf $dir.pdf
+done

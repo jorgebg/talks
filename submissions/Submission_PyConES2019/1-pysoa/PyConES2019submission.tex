@@ -1,0 +1,107 @@
+% last updated in April 2002 by Antje Endemann
+% Based on CVPR 07 and LNCS, with modifications by DAF, AZ and elle, 2008 and AA, 2010, and CC, 2011; TT, 2014; AAS, 2016
+
+\documentclass[runningheads]{llncs}
+\usepackage[english,spanish.notilde.lcroman,shorthands=off]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb} % define this before the line numbering.
+\usepackage{ruler}
+\usepackage{color}
+\usepackage{enumitem,amssymb}
+\usepackage{url}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+\hspace{-2.5pt}}
+\usepackage[width=122mm,left=12mm,paperwidth=146mm,height=193mm,top=12mm,paperheight=217mm]{geometry}
+
+\usepackage{fancyhdr}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength\headheight{80.0pt}
+\addtolength{\textheight}{-80.0pt}
+%\chead{\includegraphics[width=0.15\textwidth]{Largo.PNG}}
+
+\begin{document}
+
+\pagestyle{headings}
+\mainmatter
+
+
+\title{Service Oriented Architecture with PySOA}
+
+
+\author{Jorge Barata}
+
+\maketitle
+
+\section{Tipo de Contribuci\'on}
+
+\begin{todolist}
+  \item [\done] Charla corta
+  \item Charla extendida
+  \item P\'oster
+  \item Taller
+  \end{todolist}
+
+
+\section{Idioma}
+\begin{todolist}
+  \item Espa\~nol
+  \item [\done] Ingl\'es
+\end{todolist}
+\section{Nivel}
+
+\begin{todolist}
+  \item Avanzado
+  \item [\done] Medio
+  \item Iniciaci\'on
+  \end{todolist}
+
+\keywords{SOA, PySOA, Redis, Microservices}
+
+\newpage
+
+\section{Resumen}
+\textit{
+PySOA is a Python library for writing (micro)services and their clients. It is based on Redis BLPOP and RPUSH commands. In this talk we’ll learn how it works under the hood.
+}
+
+\section{Presentaci\'on}
+
+\begin{itemize}
+  \item Introduction
+  \item What is SOA? \cite{IanGorton}
+  \item Monolith vs SOA \cite{MartinFowler}
+  \begin{itemize}
+    \item Benefits and Drawbacks
+  \end{itemize}
+  \item PySOA \cite{PySOA}
+  \begin{itemize}
+    \item Redis
+    \item BLPOP and RPUSH
+    \item MessagePack
+    \item Client/Server Example \cite{PySOAExample}
+    \item Testing
+  \end{itemize}
+  \item Conclusion
+\end{itemize}
+
+
+
+\section{Pre-requisitos para atender a la presentación}
+Los asistentes deber\'an tener conocimientos previos de Python.
+
+\section{Otros requerimientos t\'ecnicos}
+
+Utilizar\'e mi ordenador para la propuesta y necesitar\'e adaptador HDMI a USB-C.
+
+
+\clearpage
+
+\bibliographystyle{splncs}
+\bibliography{egbib}
+\end{document}
