@@ -11,4 +11,5 @@ Each folder is a talk. Some of them were created with [marp](https://yhatt.githu
 - [Django Rest Framework introduction](https://github.com/jorgebg/talks/blob/master/drf-intro/) (Django Dublin, Jun 2018)
 - Argüman (PyConES 2018, Lightning talks)
 - [Primeros Pasos](https://docs.google.com/presentation/d/18SU0y_CyTxitTG6c0tnQB40uL7gl1Vl4flgTIBXVnaE/edit?usp=sharing) (Django Girls Madrid, Nov 2018)
-- [Django y PostgreSQL: Baterías incluídas](http://jorgebg.com/talks/django-postgresql) (Django Dublin, Jan 2019)
+- [Django y PostgreSQL: Baterías incluídas](http://jorgebg.com/talks/django-postgresql) (Django Madrid, Jan 2019)
+- [Taller de Introducción a Django](https://djangomadrid.github.io/workshop/) (Django Madrid, Sep 2019)
