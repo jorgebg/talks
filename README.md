@@ -12,3 +12,4 @@ Each folder is a talk. Some of them were created with [marp](https://yhatt.githu
 - [Django y PostgreSQL: Baterías incluídas](http://jorgebg.com/talks/django-postgresql) (Django Madrid, Jan 2019)
 - [Taller de Introducción a Django](https://djangomadrid.github.io/workshop/) (Django Madrid, Sep 2019)
 - [Service Oriented Arquitecture with PySOA](https://docs.google.com/presentation/d/1E_MoEvkJ_gZzGhlS4NjN6juil56PR2fGfWL_J8XTcwo/edit) ([PyConES, Oct 2019](https://sched.co/Vcar))
+- [Quién decide, ¿tú o el algoritmo?](https://docs.google.com/presentation/d/1mMjXUGgr0W6J02LcrXxQwTIFhEZ9_c0CiofDNGtdnLg/edit)
