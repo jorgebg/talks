@@ -11,5 +11,6 @@
 - [Taller de Introducción a Django](https://djangomadrid.github.io/workshop/) (Django Madrid, Sep 2019)
 - [Service Oriented Arquitecture with PySOA](https://docs.google.com/presentation/d/1E_MoEvkJ_gZzGhlS4NjN6juil56PR2fGfWL_J8XTcwo/edit) ([PyConES, Oct 2019](https://sched.co/Vcar))
 - [Quién decide, ¿tú o el algoritmo?](https://docs.google.com/presentation/d/1mMjXUGgr0W6J02LcrXxQwTIFhEZ9_c0CiofDNGtdnLg/edit)
+([Escépticos en el Pub, Oct 2019](https://www.youtube.com/watch?v=nAJ7pk1Sw_c))
 
 Some of them were created with [marp](https://yhatt.github.io/marp/), others with [remark](https://remarkjs.com), others are just code.
