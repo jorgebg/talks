@@ -57,15 +57,15 @@ raichu.moves()
 ###
 
 
-class Type:
+class Category:
     pass
 
 
-class Grass(Type):
+class Grass(Category):
     pass
 
 
-class Poison(Type):
+class Poison(Category):
     pass
 
 
@@ -86,12 +86,12 @@ isinstance(bulba, Poison)
 
 ###
 
-class Grass(Type):
+class Grass(Category):
     def moves(self):
         return ['LeechSeed']
 
 
-class Poison(Type):
+class Poison(Category):
     def moves(self):
         return ['VineWhip']
 
@@ -110,12 +110,12 @@ bulba.moves()
 ###
 
 
-class Grass(Type):
+class Grass(Category):
     def moves(self):
         return ['LeechSeed'] + super().moves()
 
 
-class Poison(Type):
+class Poison(Category):
     def moves(self):
         return ['VineWhip'] + super().moves()
 
@@ -137,7 +137,7 @@ Bulbasaur.mro()
 ###
 
 
-class Fire(Type):
+class Fire(Category):
     def moves(self):
         return ['Ember'] + super().moves()
 
@@ -163,7 +163,7 @@ class Pokemon:
 ###
 
 
-class Fire(Type):
+class Fire(Category):
     def moves(self):
         return ['Ember'] + super().moves()
 
@@ -182,12 +182,12 @@ char.moves()
 ###
 
 
-class Fire(Type):
+class Fire(Category):
     def moves(self):
         return ['Ember'] + super().moves()
 
 
-class Flying(Type):
+class Flying(Category):
     def moves(self):
         return ['Fly'] + super().moves()
 
