@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>La paradoja de Internet</title>
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/white.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section
+          data-markdown="slides.md"
+          data-separator="^---$"
+          data-separator-vertical="^--$"
+          data-separator-notes="^Note:"
+          data-charset="utf-8"
+        ></section>
+      </div>
+    </div>
+
+    <script src="node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="node_modules/reveal.js/plugin/notes/notes.js"></script>
+    <script src="node_modules/mermaid/dist/mermaid.min.js"></script>
+    <script src="node_modules/reveal.js-mermaid-plugin/plugin/mermaid/mermaid.js"></script>
+    <script>
+      Reveal.initialize({
+        plugins: [RevealMarkdown, RevealMermaid, RevealNotes],
+        mermaid: { layout: "elk" },
+
+        // Navigation
+        hash: true,
+        history: true,
+
+        // Linear, no vertical slides
+        navigationMode: "linear",
+
+        // No animations
+        transition: "none",
+        transitionSpeed: "default",
+        backgroundTransition: "none",
+
+        // Clean appearance
+        controls: false,
+        progress: false,
+        slideNumber: false,
+        // showNotes: false,
+        // disableLayout: true,
+      });
+    </script>
+  </body>
+</html>

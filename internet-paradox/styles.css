@@ -1,0 +1,432 @@
+/* Import Nabla for the title, JetBrains Mono for the cover subtitle */
+@import url("https://fonts.googleapis.com/css2?family=Nabla&family=Doto:wght@400;600&display=swap");
+
+/* =====================================================
+   COLOR PALETTE — blue-based, Nabla yellow accent
+   ===================================================== */
+:root {
+  --c-bg: #ffffff;
+  --c-text: #0f172a; /* deep navy */
+  --c-heading: #1e3a8a; /* indigo blue */
+  --c-accent: #2563eb; /* blue */
+  --c-accent-light: #93c5fd; /* sky blue */
+  --c-yellow: #ffde41; /* Nabla golden yellow — only for strong in headings */
+  --c-orange: #ff612b; /* Nabla orange */
+  --c-muted: #64748b; /* slate */
+  --c-border: #e2e8f0;
+  --c-code-bg: #f1f5f9;
+
+  --r-main-background-color: var(--c-bg);
+  --r-main-color: var(--c-text);
+  --r-main-font: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r-heading-font: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r-code-font: ui-monospace, "Courier New", monospace;
+  --r-heading-text-transform: none;
+  --r-heading-color: var(--c-heading);
+}
+
+/* =====================================================
+   H1 — Nabla (renders its own yellow/orange COLRv1)
+   ===================================================== */
+.reveal h1 {
+  font-family: "Nabla", display;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  filter: none;
+}
+
+/* Yellow from Nabla — only on strong/b inside headings */
+.reveal h1 strong,
+.reveal h1 b,
+.reveal h2 strong,
+.reveal h2 b,
+.reveal h3 strong,
+.reveal h3 b {
+  color: var(--c-yellow);
+  font-weight: 700;
+  -webkit-text-stroke: 0.5rem var(--c-orange);
+  paint-order: stroke fill;
+}
+
+/* =====================================================
+   H2
+   ===================================================== */
+.reveal h2 {
+  font-weight: 700;
+  color: var(--c-heading);
+  text-transform: none;
+  letter-spacing: -0.02em;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  filter: none;
+}
+
+/* =====================================================
+   H3
+   ===================================================== */
+.reveal h3 {
+  font-weight: 600;
+  color: var(--c-text);
+  text-transform: none;
+  letter-spacing: -0.01em;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
+
+/* =====================================================
+   H4 — small label
+   ===================================================== */
+.reveal h4 {
+  font-weight: 500;
+  color: var(--c-muted);
+  font-size: 0.75em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* =====================================================
+   BODY TEXT
+   ===================================================== */
+.reveal p,
+.reveal li {
+  font-size: 0.95em;
+  line-height: 1.75;
+  color: var(--c-text);
+}
+
+/* =====================================================
+   EMPHASIS — blue in body text
+   ===================================================== */
+.reveal strong,
+.reveal b {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+/* =====================================================
+   LINKS
+   ===================================================== */
+.reveal a {
+  color: var(--c-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--c-accent-light);
+  text-underline-offset: 3px;
+  transition:
+    color 0.15s,
+    text-decoration-color 0.15s;
+}
+
+.reveal a:hover {
+  color: var(--c-heading);
+  text-decoration-color: var(--c-accent);
+}
+
+/* =====================================================
+   BLOCKQUOTE
+   ===================================================== */
+.reveal blockquote {
+  border-left: 3px solid var(--c-accent-light);
+  padding: 0.5em 1em;
+  color: var(--c-muted);
+  font-style: normal;
+  background: none;
+  box-shadow: none;
+  text-align: left;
+  width: auto;
+}
+
+/* =====================================================
+   CODE
+   ===================================================== */
+.reveal pre {
+  box-shadow: none;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+}
+
+.reveal pre code {
+  background: var(--c-code-bg);
+  color: var(--c-text);
+}
+
+.reveal code {
+  background: var(--c-code-bg);
+  color: var(--c-heading);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+
+/* =====================================================
+   IMAGES — no borders or shadows by default
+   ===================================================== */
+.reveal img {
+  border: none;
+  box-shadow: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Paragraphs containing only images should have no margins */
+.reveal p:has(> img:only-child) {
+  margin: 0;
+  padding: 0;
+}
+
+/* =====================================================
+   FOOTER (first & last slide)
+   ===================================================== */
+.reveal footer {
+  position: absolute;
+  bottom: 0.6em;
+  left: 0;
+  width: 100%;
+  padding: 0 1em;
+  box-sizing: border-box;
+  font-size: 0.42em;
+  line-height: 1.5;
+  color: var(--c-muted);
+  overflow: hidden; /* clearfix for floats */
+}
+
+.reveal footer span:first-child {
+  float: left;
+  text-align: left;
+}
+.reveal footer span:last-child {
+  float: right;
+  text-align: right;
+}
+
+.reveal pre code {
+  max-height: none;
+  overflow: hidden;
+}
+
+/* =====================================================
+   MERMAID DIAGRAMS — full slide, no background
+   ===================================================== */
+.reveal .mermaid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+
+.reveal pre:has(> code.mermaid),
+.reveal .mermaid code,
+.reveal .mermaid pre code {
+  background: none;
+  border: none;
+}
+
+.reveal pre:has(> code.mermaid) {
+  width: 100%;
+  height: 100%;
+}
+
+.reveal .mermaid svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  background: transparent !important;
+}
+
+/* Remove the background rect mermaid injects */
+.reveal .mermaid svg > rect:first-child {
+  fill: transparent !important;
+}
+
+/* =====================================================
+   COVER SLIDE — 3 cloud provider servers (servers.svg)
+   ===================================================== */
+
+.reveal .cover-subtitle {
+  display: inline-block;
+  text-align: right;
+  color: var(--c-muted);
+  font-family: "Doto", monospace;
+  font-size: 0.7em;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+.reveal img.servers-logo {
+  height: 130px;
+  width: auto;
+  margin: 2rem 0 0 0;
+}
+
+.reveal .ending-subtitle {
+  display: inline-block;
+  text-align: left;
+  color: var(--c-muted);
+  font-size: 0.7em;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   TWO-COLUMN LISTS
+   ===================================================== */
+.reveal .two-columns {
+  column-count: 2;
+  column-gap: 2em;
+  list-style-position: inside;
+}
+
+/* =====================================================
+   ARCHITECTURE DIAGRAM (icon + arrow stack)
+   ===================================================== */
+.reveal .arch-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.reveal .arch-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.reveal .arch-icon,
+.reveal .arch-icon-sm,
+.reveal .arch-icon-lg {
+  display: inline-block;
+  flex-shrink: 0;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+  background-color: currentColor;
+}
+
+.reveal .arch-icon {
+  height: 56px;
+  width: 56px;
+  color: var(--c-muted);
+}
+.reveal .arch-icon-sm {
+  height: 40px;
+  width: 40px;
+  color: inherit;
+}
+.reveal .arch-icon-lg {
+  height: 96px;
+  width: 96px;
+  color: var(--c-muted);
+}
+
+.reveal .arch-icon.arch-icon-aws {
+  color: #ff9900;
+}
+
+/* ── Icon mask sources ────────────────────────────── */
+.reveal .ic-user {
+  -webkit-mask-image: url(img/icons/user.svg);
+  mask-image: url(img/icons/user.svg);
+}
+.reveal .ic-cdn {
+  -webkit-mask-image: url(img/icons/cdn.svg);
+  mask-image: url(img/icons/cdn.svg);
+}
+.reveal .ic-lb {
+  -webkit-mask-image: url(img/icons/lb.svg);
+  mask-image: url(img/icons/lb.svg);
+  transform: rotate(180deg);
+}
+.reveal .ic-servers {
+  -webkit-mask-image: url(img/icons/servers.svg);
+  mask-image: url(img/icons/servers.svg);
+}
+.reveal .ic-db {
+  -webkit-mask-image: url(img/icons/db.svg);
+  mask-image: url(img/icons/db.svg);
+}
+.reveal .ic-map-pin {
+  -webkit-mask-image: url(img/icons/map-pin.svg);
+  mask-image: url(img/icons/map-pin.svg);
+}
+.reveal .ic-file-plus {
+  -webkit-mask-image: url(img/icons/file-plus.svg);
+  mask-image: url(img/icons/file-plus.svg);
+}
+.reveal .ic-ghost {
+  -webkit-mask-image: url(img/icons/ghost.svg);
+  mask-image: url(img/icons/ghost.svg);
+}
+.reveal .ic-alert-triangle {
+  -webkit-mask-image: url(img/icons/alert-triangle.svg);
+  mask-image: url(img/icons/alert-triangle.svg);
+}
+.reveal .ic-circle-x {
+  -webkit-mask-image: url(img/icons/circle-x.svg);
+  mask-image: url(img/icons/circle-x.svg);
+}
+.reveal .ic-db-x {
+  -webkit-mask-image: url(img/icons/db-x.svg);
+  mask-image: url(img/icons/db-x.svg);
+}
+
+.reveal .arch-label {
+  font-size: 0.85em;
+  font-weight: 600;
+  min-width: 180px;
+  text-align: left;
+  color: var(--c-text);
+}
+
+.reveal .arch-loop {
+  color: var(--c-muted);
+}
+
+.reveal .arch-arrow {
+  font-size: 1.4em;
+  line-height: 1;
+  color: color-mix(in srgb, var(--c-muted) 35%, white);
+  padding: 0.05em 0;
+  width: 56px;
+  text-align: center;
+}
+
+.reveal .arch-arrow-multi {
+  font-size: 1.1em;
+  width: auto;
+  white-space: nowrap;
+  letter-spacing: 0.4em;
+}
+
+.reveal .arch-arrow-icon {
+  color: color-mix(in srgb, currentColor 35%, white);
+}
+
+.reveal .arch-sublabel {
+  font-size: 0.65em;
+  font-weight: 400;
+  color: var(--c-muted);
+  margin-left: 0.6em;
+}
+
+/* =====================================================
+   ATTRIBUTION — very small, gray
+   ===================================================== */
+.reveal .attributtion {
+  font-size: 0.2em;
+  color: #888;
+  width: 30%;
+  padding: 3em;
+}
